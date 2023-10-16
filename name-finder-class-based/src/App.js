@@ -1,6 +1,8 @@
 import logo from "./logo.svg";
 import "./App.css";
 import { Component } from "react";
+import NameCard from "./components/name-card/name-card.component";
+import NameSearch from "./components/name-search/name-search.component";
 
 class App extends Component {
   constructor() {
@@ -33,18 +35,8 @@ class App extends Component {
     });
     return (
       <div>
-        <input
-          type="search"
-          placeholder="search persons"
-          onChange={this.searchEvent}
-        />
-        {filtered.map((person) => {
-          return (
-            <div key={person.id}>
-              <p>{person.firstName + " " + person.lastName}</p>
-            </div>
-          );
-        })}
+        <NameSearch eventHandler={this.searchEvent}></NameSearch>
+        <NameCard filteredPersons={filtered}></NameCard>
       </div>
     );
   }
