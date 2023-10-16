@@ -1,25 +1,53 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import "./App.css";
+import { Component } from "react";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  constructor() {
+    super();
+
+    this.state = {
+      persons: [],
+      search: "",
+    };
+  }
+
+  componentDidMount() {
+    fetch("https://dummyjson.com/users")
+      .then((res) => res.json())
+      .then((persons) => this.setState({ persons: persons.users }));
+  }
+
+  searchEvent = (event) => {
+    const searchTerm = event.target.value.toLocaleLowerCase();
+    this.setState({ search: searchTerm });
+  };
+
+  render() {
+    const filtered = this.state.persons.filter((person) => {
+      let name =
+        person.firstName.toLocaleLowerCase() +
+        " " +
+        person.lastName.toLocaleLowerCase();
+      return name.includes(this.state.search);
+    });
+    return (
+      <div>
+        <input
+          type="search"
+          placeholder="search persons"
+          onChange={this.searchEvent}
+        />
+        {filtered.map((person) => {
+          return (
+            <div key={person.id}>
+              <p>{person.firstName + " " + person.lastName}</p>
+            </div>
+          );
+        })}
+      </div>
+    );
+  }
 }
 
 export default App;
