@@ -11,7 +11,7 @@ function Navigation() {
           <Logo className="logo"></Logo>
         </Link>
         <div className="nav-links-container">
-          <Link className="nav-link" to="/sign-in">
+          <Link className="nav-link" to="/auth">
             Sign In
           </Link>
         </div>
