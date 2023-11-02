@@ -1,5 +1,10 @@
+import { Person } from "../../App";
 
-function NameCard(props) {
+type Props = {
+  filteredPersons: Person[]
+}
+
+function NameCard(props: Props) {
 
   return props.filteredPersons.map((person) => {
       return (

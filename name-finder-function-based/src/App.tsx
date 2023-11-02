@@ -10,7 +10,7 @@ export type Person = {
   lastName: string
 }
 
-export type Persons = {
+type Persons = {
   users: Person[]
 }
 
@@ -28,7 +28,6 @@ function App() {
   }, []);
 
   useEffect(() => {
-    console.log(persons)
     setFiltered(
       persons.filter((person) => {
         let name =
