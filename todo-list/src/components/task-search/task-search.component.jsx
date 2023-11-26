@@ -1,12 +1,12 @@
 import { forwardRef } from "react";
-import "./task-search.styles.css";
+import { StyledSearchInput } from "./task-search.styles.jsx";
 
 export const TaskSearch = forwardRef(function TaskSearch(
   { name, id, placeholder, inputHandler },
   ref
 ) {
   return (
-    <input
+    <StyledSearchInput
       type="search"
       name={name}
       id={id}

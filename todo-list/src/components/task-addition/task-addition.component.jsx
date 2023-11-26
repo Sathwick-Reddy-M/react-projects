@@ -1,19 +1,23 @@
 import { forwardRef } from "react";
-import "./task-addition.styles.css";
+import {
+  Container,
+  StyledInput,
+  StyledButton,
+} from "./task-addition.styles.jsx";
 
 export const TaskAddition = forwardRef(
   ({ name, id, placeholder, clickHandler }, ref) => {
     return (
-      <div>
-        <input
+      <Container>
+        <StyledInput
           type="text"
           name={name}
           id={id}
           placeholder={placeholder}
           ref={ref}
         />
-        <button onClick={clickHandler}>+</button>
-      </div>
+        <StyledButton onClick={clickHandler}>+</StyledButton>
+      </Container>
     );
   }
 );

@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { TaskAddition } from "../task-addition/task-addition.component";
 import { TaskSearch } from "../task-search/task-search.component";
 import { TaskList } from "../task-list/task-list.component";
-import "./task.styles.css";
+import { StyledTitle } from "./task.styles.jsx";
 
 export function Task({ title }) {
   const ref = useRef(null);
@@ -35,12 +35,16 @@ export function Task({ title }) {
     setSearchValue(text);
   };
 
+  const deleteHandler = (index) => {
+    setTasks(tasks.filter((task, i) => i !== index));
+  };
+
   return (
     <div>
-      <h2>{title}</h2>
+      <StyledTitle>{title}</StyledTitle>
       <TaskAddition ref={ref} clickHandler={clickHandler} />
       <TaskSearch ref={searchRef} inputHandler={inputHandler} />
-      <TaskList tasks={filteredTasks} />
+      <TaskList tasks={filteredTasks} deleteHandler={deleteHandler} />
     </div>
   );
 }

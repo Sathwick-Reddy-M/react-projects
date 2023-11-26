@@ -1,11 +1,20 @@
-import "./task-list.styles.css";
+import {
+  StyledList,
+  StyledListItem,
+  DeleteButton,
+} from "./task-list.styles.jsx";
 
-export function TaskList({ tasks }) {
+export function TaskList({ tasks, deleteHandler }) {
   return (
-    <ul>
+    <StyledList>
       {tasks.map((task, index) => {
-        return <li key={index}>{task}</li>;
+        return (
+          <StyledListItem key={index}>
+            {task}
+            <DeleteButton onClick={() => deleteHandler(index)}>X</DeleteButton>
+          </StyledListItem>
+        );
       })}
-    </ul>
+    </StyledList>
   );
 }
