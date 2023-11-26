@@ -19,3 +19,14 @@ export const DeleteButton = styled.button`
   cursor: pointer;
   color: red;
 `;
+
+export const StartButton = styled.button`
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: green;
+`;
+
+export const Checkbox = styled.input`
+  margin-right: 10px;
+`;
