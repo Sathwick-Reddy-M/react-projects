@@ -1,9 +1,19 @@
 import { Task } from "./components/task/task.component";
 import "./App.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 function App() {
-  const [tasks, setTasks] = useState({ todo: [], doing: [], done: [] });
+  const [tasks, setTasks] = useState(() => {
+    const storedTasks = localStorage.getItem("tasks");
+    return storedTasks
+      ? JSON.parse(storedTasks)
+      : { todo: [], doing: [], done: [] };
+  });
+
+  useEffect(() => {
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+  }, [tasks]);
+
   return (
     <div>
       <h1>To-Do List</h1>
