@@ -65,6 +65,12 @@ export function Task({ id, title, tasks, setTasks }) {
     setTasks(newTasks);
   };
 
+  const keyDownHandler = (e) => {
+    if (e.keyCode === 13) {
+      clickHandler();
+    }
+  };
+
   return (
     <div>
       <StyledTitle>{title}</StyledTitle>
@@ -72,6 +78,7 @@ export function Task({ id, title, tasks, setTasks }) {
         placeholder="Add Task"
         ref={ref}
         clickHandler={clickHandler}
+        keyDownHandler={keyDownHandler}
       />
       <TaskSearch
         placeholder="Search Tasks"

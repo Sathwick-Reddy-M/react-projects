@@ -5,11 +5,18 @@ import {
   StyledButton,
 } from "./task-addition.styles.jsx";
 
-export const TaskAddition = forwardRef(({ placeholder, clickHandler }, ref) => {
-  return (
-    <Container>
-      <StyledInput type="text" placeholder={placeholder} ref={ref} />
-      <StyledButton onClick={clickHandler}>+</StyledButton>
-    </Container>
-  );
-});
+export const TaskAddition = forwardRef(
+  ({ placeholder, clickHandler, keyDownHandler }, ref) => {
+    return (
+      <Container>
+        <StyledInput
+          type="text"
+          placeholder={placeholder}
+          ref={ref}
+          onKeyDown={keyDownHandler}
+        />
+        <StyledButton onClick={clickHandler}>+</StyledButton>
+      </Container>
+    );
+  }
+);
