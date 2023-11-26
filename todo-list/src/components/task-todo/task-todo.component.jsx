@@ -1,15 +1,30 @@
+import { useRef, useState } from "react";
 import { TaskAddition } from "../task-addition/task-addition.component";
 import { TaskSearch } from "../task-search/task-search.component";
 import { TaskList } from "../task-list/task-list.component";
 import "./task-todo.styles.css";
 
 export function TaskTodo() {
+  const ref = useRef(null);
+  const [tasks, setTasks] = useState([]);
+
+  const clickHandler = () => {
+    const text = ref.current.value.trim();
+
+    if (text === "") {
+      alert("Task name missing");
+      return;
+    }
+    setTasks([...tasks, text]);
+    ref.current.value = "";
+  };
+
   return (
     <div>
       <h2>To-Do</h2>
-      <TaskAddition />
+      <TaskAddition ref={ref} clickHandler={clickHandler} />
       <TaskSearch />
-      <TaskList tasks={[]} />
+      <TaskList tasks={tasks} />
     </div>
   );
 }
