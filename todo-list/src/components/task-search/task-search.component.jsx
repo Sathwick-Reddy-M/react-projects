@@ -1,12 +1,5 @@
 import "./task-search.styles.css";
 
-export function TaskSearch() {
-  return (
-    <input
-      type="search"
-      name="task-search"
-      id="task-search"
-      placeholder="Search Task"
-    />
-  );
+export function TaskSearch({ name, id, placeholder }) {
+  return <input type="search" name={name} id={id} placeholder={placeholder} />;
 }

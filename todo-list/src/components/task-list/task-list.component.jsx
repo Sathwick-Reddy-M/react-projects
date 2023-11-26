@@ -1,10 +1,11 @@
 import "./task-list.styles.css";
 
-export function TaskList() {
+export function TaskList({ tasks }) {
   return (
     <ul>
-      <li>List Item 1</li>
-      <li>List Item 2</li>
+      {tasks.map((task, index) => {
+        <li key={index} task></li>;
+      })}
     </ul>
   );
 }
