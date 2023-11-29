@@ -1,70 +1,62 @@
-# Getting Started with Create React App
+# [To-Do List](https://98pwsq.csb.app)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This React application is a dynamic and interactive To-Do List, designed to help users efficiently manage their tasks. It features a user interface for adding, deleting, and searching tasks, categorized into "To-Do", "Doing", and "Done". The application leverages the React Hooks for state management and incorporates local storage for data persistence, ensuring user data is saved across sessions.
 
-## Available Scripts
+Checkout the react app [here](https://98pwsq.csb.app).
 
-In the project directory, you can run:
+## Components
 
-### `npm start`
+### TaskAddition
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- **Functionality**: Allows users to add new tasks.
+- **Features**:
+  - Input field with a customizable placeholder.
+  - Submit button to add tasks.
+  - Key down event handling for easy task submission.
+- **Usage**:
+  - Type a task in the input field and either press the "+" button or the Enter key to add the task to the list.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### TaskList
 
-### `npm test`
+- **Functionality**: Displays tasks in "To-Do", "Doing", or "Done" categories.
+- **Features**:
+  - Custom styled list items.
+  - Start, delete, and checkbox buttons for task management.
+  - Different rendering behavior based on the task category.
+- **Usage**:
+  - Click "Start" to move a task to the "Doing" category.
+  - Click "X" to delete a task.
+  - Check the checkbox to mark a task as "Done".
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### TaskSearch
 
-### `npm run build`
+- **Functionality**: Enables searching within tasks.
+- **Features**:
+  - Styled search input for a seamless experience.
+  - Dynamic filtering of tasks based on the search query.
+- **Usage**:
+  - Enter keywords in the search bar to filter out tasks.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Task
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- **Functionality**: Combines TaskAddition, TaskSearch, and TaskList components.
+- **Features**:
+  - Integrates task addition, searching, and listing functionalities.
+  - Implements logic for task manipulation (add, delete, start, and mark as done).
+  - Uses refs for input elements and state hooks for handling task data.
+- **Usage**:
+  - The main component where users interact with the task list.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### App
 
-### `npm run eject`
+- **Functionality**: The root component that initializes and renders the Task components.
+- **Features**:
+  - Initializes the state with tasks from local storage or defaults to empty lists.
+  - Persists tasks in local storage on state update.
+  - Renders Task components for each category: "To-Do", "Doing", and "Done".
+- **Usage**:
+  - The entry point of the application, rendering the entire To-Do list structure.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Styling
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+The project utilises the `styled-components` for a consistent and maintainable styling approach

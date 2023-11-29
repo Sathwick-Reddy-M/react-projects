@@ -2,6 +2,8 @@
 
 This project, `name-finder-function-based`, is a demonstration of using functional components in React, enhanced with TypeScript. It allows users to search for names from a list fetched from an API.
 
+Checkout the react app [here](https://z42wvw.csb.app/)
+
 ## Components
 
 ### NameCard

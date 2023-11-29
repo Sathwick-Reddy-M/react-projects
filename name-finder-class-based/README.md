@@ -2,6 +2,8 @@
 
 This project, `name-finder-class-based`, showcases a class based approach to building React components. It allows users to search for names from a list fetched from an API.
 
+Checkout the react app [here](https://vgznf7.csb.app/)
+
 ## Components
 
 ### NameCard
