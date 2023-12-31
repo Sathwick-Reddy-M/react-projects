@@ -98,7 +98,7 @@ export async function getReviewsForMovie(movieId) {
   return null;
 }
 
-export async function saveReview(movieId, review) {
+export async function saveReview(movieId, movieTitle, review) {
   if (!auth.currentUser) return;
 
   const userRef = doc(db, "users", auth.currentUser.uid);
@@ -110,29 +110,46 @@ export async function saveReview(movieId, review) {
   const userId = auth.currentUser.uid;
 
   const updatedReview = {
+    movieId,
     username,
     review,
+    title: movieTitle,
     userId,
   };
 
-  const userResponse = await updateDoc(userRef, {
-    reviews: arrayUnion(updatedReview),
-  });
-
-  let reviewResponse = null;
   const reviews = reviewSnapshot.data()?.reviews || [];
 
   const userHasReviewIndex = reviews.findIndex((r) => r.userId === userId);
-
+  const userReviews = userSnapshot.data().reviews;
+  const userReviewIndex = userReviews.findIndex((r) => r.movieId === movieId);
   if (userHasReviewIndex !== -1) {
     reviews[userHasReviewIndex] = updatedReview;
+    userReviews[userReviewIndex] = updatedReview;
   } else {
     reviews.push(updatedReview);
+    userReviews.push(updatedReview);
   }
 
-  reviewResponse = await setDoc(reviewRef, {
+  const reviewResponse = await setDoc(reviewRef, {
     reviews,
   });
 
+  const userResponse = await updateDoc(userRef, {
+    reviews: userReviews,
+  });
+
   return { reviewResponse, userResponse };
+}
+
+export async function getUserReviews(user) {
+  if (!user) return;
+  const userRef = doc(db, "users", user.uid);
+  const userSnapshot = await getDoc(userRef);
+
+  if (userSnapshot.exists()) {
+    const reviews = userSnapshot.data().reviews;
+    return reviews;
+  }
+
+  return null;
 }

@@ -3,10 +3,10 @@ import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { saveReview } from "../../utils/firebase/firebase.utils";
 
-export function AddReview({ movieId }) {
+export function AddReview({ movieId, movieTitle }) {
   const [value, setValue] = useState("");
   async function saveClickHandler() {
-    const res = await saveReview(movieId, value);
+    const res = await saveReview(movieId, movieTitle, value);
     alert("Review saved!");
     window.location.reload();
   }

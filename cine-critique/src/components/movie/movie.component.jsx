@@ -64,7 +64,9 @@ export function Movie() {
         <tbody>{renderRows()}</tbody>
       </table>
       <Review movieId={movieId} />
-      {currentUser && <AddReview movieId={movieId} />}
+      {currentUser && (
+        <AddReview movieId={movieId} movieTitle={movieDetails.Title} />
+      )}
     </div>
   ) : null;
 }

@@ -5,6 +5,8 @@ import { SignUp } from "./components/sign-up/sign-up.component";
 import { Navigation } from "./components/navigation/navigation.component";
 import "./App.css";
 import { Movie } from "./components/movie/movie.component";
+import { UserReviews } from "./components/user-reviews/user-reviews.component";
+import { ReviewEditor } from "./components/review-editor/review-editor.componet";
 
 function App() {
   return (
@@ -14,6 +16,8 @@ function App() {
         <Route path="signin" element={<SignIn />} />
         <Route path="signup" element={<SignUp />} />
         <Route path="movie/:movieId" element={<Movie />} />
+        <Route path="reviews" element={<UserReviews />} />
+        <Route path="reviewedit/:movieId/:title" element={<ReviewEditor />} />
       </Route>
     </Routes>
   );

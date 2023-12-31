@@ -12,6 +12,7 @@ export function Navigation() {
       <div>
         <Link to="/">Home</Link>
         <Link onClick={signOutUser}>Sign Out</Link>
+        <Link to="reviews">Reviews</Link>
       </div>
       <Outlet />
     </Fragment>
