@@ -11,3 +11,15 @@ export async function searchMovies(searchTerm, page = 1) {
     console.log(error);
   }
 }
+
+export async function getMovieDetails(movieId) {
+  try {
+    const response = await fetch(
+      `https://www.omdbapi.com/?apikey=${REACT_APP_API_KEY}&i=${movieId}`
+    );
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+}

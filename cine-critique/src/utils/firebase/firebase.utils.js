@@ -7,7 +7,14 @@ import {
   onAuthStateChanged,
 } from "firebase/auth";
 
-import { getDoc, doc, getFirestore, setDoc } from "firebase/firestore";
+import {
+  getDoc,
+  doc,
+  getFirestore,
+  setDoc,
+  updateDoc,
+  arrayUnion,
+} from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: "AIzaSyD3w81hoASko2rpT2D8SZotAOquCfe_ovM",
@@ -58,7 +65,6 @@ export async function createUserDocFromAuth(userAuth, userName) {
   if (!userAuth) return;
 
   const userRef = doc(db, "users", userAuth.uid);
-  const reviewsRef = doc(db, "reviews", userAuth.uid);
   const userSnapshot = await getDoc(userRef);
 
   if (!userSnapshot.exists()) {
@@ -70,8 +76,6 @@ export async function createUserDocFromAuth(userAuth, userName) {
         email,
         userName,
         createdAt,
-      });
-      const reviewsRes = await setDoc(reviewsRef, {
         reviews: [],
       });
     } catch (error) {
@@ -80,4 +84,55 @@ export async function createUserDocFromAuth(userAuth, userName) {
   }
 
   return userRef;
+}
+
+export async function getReviewsForMovie(movieId) {
+  const reviewsRef = doc(db, "reviews", movieId);
+  const reviewsSnapshot = await getDoc(reviewsRef);
+
+  if (reviewsSnapshot.exists()) {
+    const reviews = reviewsSnapshot.data().reviews;
+    return reviews;
+  }
+
+  return null;
+}
+
+export async function saveReview(movieId, review) {
+  if (!auth.currentUser) return;
+
+  const userRef = doc(db, "users", auth.currentUser.uid);
+  const userSnapshot = await getDoc(userRef);
+  const reviewRef = doc(db, "reviews", movieId);
+  const reviewSnapshot = await getDoc(reviewRef);
+
+  const username = userSnapshot.data().userName;
+  const userId = auth.currentUser.uid;
+
+  const updatedReview = {
+    username,
+    review,
+    userId,
+  };
+
+  const userResponse = await updateDoc(userRef, {
+    reviews: arrayUnion(updatedReview),
+  });
+
+  let reviewResponse = null;
+  const reviews = reviewSnapshot.data()?.reviews || [];
+
+  const userHasReviewIndex = reviews.findIndex((r) => r.userId === userId);
+
+  if (userHasReviewIndex !== -1) {
+    reviews[userHasReviewIndex] = updatedReview;
+  } else {
+    reviews.push(updatedReview);
+  }
+
+  reviewResponse = await setDoc(reviewRef, {
+    reviews,
+  });
+
+  return { reviewResponse, userResponse };
 }
