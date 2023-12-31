@@ -58,16 +58,21 @@ export async function createUserDocFromAuth(userAuth, userName) {
   if (!userAuth) return;
 
   const userRef = doc(db, "users", userAuth.uid);
+  const reviewsRef = doc(db, "reviews", userAuth.uid);
   const userSnapshot = await getDoc(userRef);
+
   if (!userSnapshot.exists()) {
     const { email } = userAuth;
     const createdAt = new Date();
 
     try {
-      await setDoc(userRef, {
+      const userRes = await setDoc(userRef, {
         email,
         userName,
         createdAt,
+      });
+      const reviewsRes = await setDoc(reviewsRef, {
+        reviews: [],
       });
     } catch (error) {
       console.log(error);
