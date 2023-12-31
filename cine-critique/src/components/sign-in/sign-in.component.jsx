@@ -1,12 +1,13 @@
 import { useState } from "react";
+import { signInUser } from "../../utils/firebase/firebase.utils";
 
 export function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSignIn = (e) => {
+  const handleSignIn = async (e) => {
     e.preventDefault();
-    console.log("Signing in with:", { email, password });
+    const response = await signInUser(email, password);
     setEmail("");
     setPassword("");
   };

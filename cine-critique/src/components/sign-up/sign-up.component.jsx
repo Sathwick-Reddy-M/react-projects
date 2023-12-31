@@ -1,13 +1,21 @@
 import { useState } from "react";
+import {
+  createUserDocFromAuth,
+  signUpUser,
+} from "../../utils/firebase/firebase.utils";
 
 export function SignUp() {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSignUp = (e) => {
+  const handleSignUp = async (e) => {
     e.preventDefault();
-    console.log("Signing up with:", { username, email, password });
+    try {
+      const response = await signUpUser(username, email, password);
+    } catch (error) {
+      console.log(error);
+    }
     setUsername("");
     setEmail("");
     setPassword("");
