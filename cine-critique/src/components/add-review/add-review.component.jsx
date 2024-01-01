@@ -1,12 +1,27 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
-import { saveReview } from "../../utils/firebase/firebase.utils";
+import { saveReview, deleteReview } from "../../utils/firebase/firebase.utils";
+import { UserContext } from "../../contexts/user.context";
 
-export function AddReview({ movieId, movieTitle }) {
-  const [value, setValue] = useState("");
+export function AddReview({ movieId, movieTitle, movieReview }) {
+  const [value, setValue] = useState(movieReview || "");
+  const { userReviews, setUserReviews } = useContext(UserContext);
+
+  async function deleteHandler() {
+    const response = await deleteReview(movieId);
+
+    const updatedUserReviews = userReviews.filter(
+      (review) => review.movieId !== movieId
+    );
+    setUserReviews(updatedUserReviews);
+    alert("Review deleted!");
+    window.location.reload();
+  }
+
   async function saveClickHandler() {
-    const res = await saveReview(movieId, movieTitle, value);
+    const { userReviews } = await saveReview(movieId, movieTitle, value);
+    setUserReviews(userReviews);
     alert("Review saved!");
     window.location.reload();
   }
@@ -45,6 +60,7 @@ export function AddReview({ movieId, movieTitle }) {
       />
       <div>
         <button onClick={saveClickHandler}>Save Review</button>
+        <button onClick={deleteHandler}>Delete Review</button>
       </div>
     </div>
   );

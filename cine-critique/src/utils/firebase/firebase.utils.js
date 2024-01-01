@@ -13,6 +13,7 @@ import {
   getFirestore,
   setDoc,
   updateDoc,
+  deleteDoc,
   arrayUnion,
 } from "firebase/firestore";
 
@@ -138,7 +139,7 @@ export async function saveReview(movieId, movieTitle, review) {
     reviews: userReviews,
   });
 
-  return { reviewResponse, userResponse };
+  return { reviews, userReviews };
 }
 
 export async function getUserReviews(user) {
@@ -152,4 +153,31 @@ export async function getUserReviews(user) {
   }
 
   return null;
+}
+
+export async function deleteReview(movieId) {
+  if (!auth.currentUser) return;
+
+  const userRef = doc(db, "users", auth.currentUser.uid);
+  const userSnapshot = await getDoc(userRef);
+  const reviewRef = doc(db, "reviews", movieId);
+  const reviewSnapshot = await getDoc(reviewRef);
+
+  const reviews = reviewSnapshot.data()?.reviews || [];
+  const updatedReviews = reviews.filter(
+    (r) => r.userId !== auth.currentUser.uid
+  );
+
+  const userReviews = userSnapshot.data().reviews;
+  const updatedUserReviews = userReviews.filter((r) => r.movieId !== movieId);
+
+  const reviewResponse = await setDoc(reviewRef, {
+    reviews: updatedReviews,
+  });
+
+  const userResponse = await updateDoc(userRef, {
+    reviews: updatedUserReviews,
+  });
+
+  return { reviews, userReviews };
 }

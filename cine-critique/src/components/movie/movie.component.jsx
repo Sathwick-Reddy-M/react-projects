@@ -8,7 +8,11 @@ import { UserContext } from "../../contexts/user.context";
 export function Movie() {
   const { movieId } = useParams();
   const [movieDetails, setMovieDetails] = useState(null);
-  const { currentUser } = useContext(UserContext);
+  const { currentUser, userReviews } = useContext(UserContext);
+  const reviewObj = userReviews
+    ? userReviews.find((review) => review.movieId === movieId)
+    : null;
+  const review = reviewObj ? reviewObj.review : "";
 
   useEffect(() => {
     const asyncHandler = async () => {
@@ -65,7 +69,11 @@ export function Movie() {
       </table>
       <Review movieId={movieId} />
       {currentUser && (
-        <AddReview movieId={movieId} movieTitle={movieDetails.Title} />
+        <AddReview
+          movieId={movieId}
+          movieTitle={movieDetails.Title}
+          movieReview={review}
+        />
       )}
     </div>
   ) : null;

@@ -17,7 +17,7 @@ function App() {
         <Route path="signup" element={<SignUp />} />
         <Route path="movie/:movieId" element={<Movie />} />
         <Route path="reviews" element={<UserReviews />} />
-        <Route path="reviewedit/:movieId/:title" element={<ReviewEditor />} />
+        <Route path="reviewedit/:movieId" element={<ReviewEditor />} />
       </Route>
     </Routes>
   );
