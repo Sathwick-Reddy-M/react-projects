@@ -1,8 +1,12 @@
 import { useState } from "react";
+import { signUpUser } from "../../utils/firebase/firebase.utils";
 import {
-  createUserDocFromAuth,
-  signUpUser,
-} from "../../utils/firebase/firebase.utils";
+  SignUpContainer,
+  SignUpTitle,
+  FormLabel,
+  FormInput,
+  SignUpButton,
+} from "./sign-up.styles";
 
 export function SignUp() {
   const [username, setUsername] = useState("");
@@ -22,38 +26,38 @@ export function SignUp() {
   };
 
   return (
-    <div>
-      <h2>Sign Up</h2>
+    <SignUpContainer>
+      <SignUpTitle>Sign Up</SignUpTitle>
       <form onSubmit={handleSignUp}>
-        <label>
+        <FormLabel>
           Username:
-          <input
+          <FormInput
             type="text"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
           />
-        </label>
+        </FormLabel>
         <br />
-        <label>
+        <FormLabel>
           Email:
-          <input
+          <FormInput
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
-        </label>
+        </FormLabel>
         <br />
-        <label>
+        <FormLabel>
           Password:
-          <input
+          <FormInput
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-        </label>
+        </FormLabel>
         <br />
-        <button type="submit">Sign Up</button>
+        <SignUpButton type="submit">Sign Up</SignUpButton>
       </form>
-    </div>
+    </SignUpContainer>
   );
 }

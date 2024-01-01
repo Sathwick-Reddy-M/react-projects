@@ -3,6 +3,13 @@ import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { saveReview, deleteReview } from "../../utils/firebase/firebase.utils";
 import { UserContext } from "../../contexts/user.context";
+import {
+  ReviewContainer,
+  QuillContainer,
+  ButtonContainer,
+  SaveButton,
+  DeleteButton,
+} from "./add-review.styles";
 
 export function AddReview({ movieId, movieTitle, movieReview }) {
   const [value, setValue] = useState(movieReview || "");
@@ -50,18 +57,21 @@ export function AddReview({ movieId, movieTitle, movieReview }) {
     "video",
   ];
   return (
-    <div>
-      <ReactQuill
-        theme="snow"
-        value={value}
-        onChange={setValue}
-        modules={modules}
-        formats={formats}
-      />
-      <div>
-        <button onClick={saveClickHandler}>Save Review</button>
-        <button onClick={deleteHandler}>Delete Review</button>
-      </div>
-    </div>
+    <ReviewContainer>
+      <QuillContainer>
+        <ReactQuill
+          theme="snow"
+          value={value}
+          onChange={setValue}
+          modules={modules}
+          formats={formats}
+        />
+      </QuillContainer>
+
+      <ButtonContainer>
+        <SaveButton onClick={saveClickHandler}>Save Review</SaveButton>
+        <DeleteButton onClick={deleteHandler}>Delete Review</DeleteButton>
+      </ButtonContainer>
+    </ReviewContainer>
   );
 }

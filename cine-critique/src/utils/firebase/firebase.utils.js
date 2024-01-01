@@ -13,8 +13,6 @@ import {
   getFirestore,
   setDoc,
   updateDoc,
-  deleteDoc,
-  arrayUnion,
 } from "firebase/firestore";
 
 const firebaseConfig = {

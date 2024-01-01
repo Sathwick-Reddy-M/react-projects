@@ -4,6 +4,12 @@ import { getMovieDetails } from "../../utils/requests/requests.utils";
 import { Review } from "../review/review.component";
 import { AddReview } from "../add-review/add-review.component";
 import { UserContext } from "../../contexts/user.context";
+import {
+  MovieContainer,
+  MovieTitle,
+  MoviePoster,
+  MovieTable,
+} from "./movie.styles";
 
 export function Movie() {
   const { movieId } = useParams();
@@ -57,16 +63,16 @@ export function Movie() {
   };
 
   return movieDetails ? (
-    <div>
-      <h1>{movieDetails.Title}</h1>
-      <img
+    <MovieContainer>
+      <MovieTitle>{movieDetails.Title}</MovieTitle>
+      <MoviePoster
         src={movieDetails.Poster}
         alt="Movie Poster"
         style={{ maxWidth: "100%" }}
       />
-      <table>
+      <MovieTable>
         <tbody>{renderRows()}</tbody>
-      </table>
+      </MovieTable>
       <Review movieId={movieId} />
       {currentUser && (
         <AddReview
@@ -75,6 +81,6 @@ export function Movie() {
           movieReview={review}
         />
       )}
-    </div>
+    </MovieContainer>
   ) : null;
 }

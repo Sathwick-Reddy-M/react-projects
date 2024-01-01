@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { searchMovies } from "../../utils/requests/requests.utils";
-import { Link } from "react-router-dom";
+import { MovieList, MovieItem, MovieLink } from "./search-movie.styles";
 
 export function SearchMovie({ searchTerm }) {
   const [movies, setMovies] = useState([]);
@@ -19,17 +19,19 @@ export function SearchMovie({ searchTerm }) {
 
   return (
     <div>
-      <ul>
+      <MovieList>
         {movies
           ? movies.map((movie, index) => {
               return (
-                <li key={index}>
-                  <Link to={`/movie/${movie.imdbID}`}>{movie.Title}</Link>
-                </li>
+                <MovieItem key={index}>
+                  <MovieLink to={`/movie/${movie.imdbID}`}>
+                    {movie.Title}
+                  </MovieLink>
+                </MovieItem>
               );
             })
           : null}
-      </ul>
+      </MovieList>
     </div>
   );
 }

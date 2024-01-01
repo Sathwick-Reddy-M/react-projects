@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { SearchMovie } from "../search-movie/search-movie.component";
+import { HomeContainer, SearchInput, Title } from "./home.styles";
 
 export function Home() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -9,10 +10,10 @@ export function Home() {
   };
 
   return (
-    <div>
-      <h3>Search Movies & TV Shows</h3>
-      <input type="search" value={searchTerm} onChange={changeHandler} />
+    <HomeContainer>
+      <Title>Search Movies & TV Shows</Title>
+      <SearchInput type="search" value={searchTerm} onChange={changeHandler} />
       <SearchMovie searchTerm={searchTerm} />
-    </div>
+    </HomeContainer>
   );
 }
