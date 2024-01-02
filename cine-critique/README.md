@@ -1,70 +1,49 @@
-# Getting Started with Create React App
+# Movie Reviews App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This platform allows users to explore movies, read, and write reviews for movies. It utilizes Firebase for user authentication and Firestore for storing user details and reviews for each movie. React Context API is used for sharing user and user reviews data among the components.
 
-## Available Scripts
+Checkout the app [here](https://k997nc.csb.app/)
 
-In the project directory, you can run:
+## Features
 
-### `npm start`
+- **Search Movies:** Use the search feature to find information about your favorite movies.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- **View Movie Details:** Click on a movie to see detailed information, including ratings, cast, and more.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- **Write Reviews:** Registered users can write reviews for movies they have watched.
 
-### `npm test`
+- **Edit and Delete Reviews:** Users can edit and delete their own reviews.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- **User Authentication:** Secure authentication system for user registration and sign-in.
 
-### `npm run build`
+## Technologies Used
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- **React Context API:** React Context API is used for sharing user and user review information among the components.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- **Firebase:** User authentication is handled by Firebase.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- **Firestore:** User information and the review information are stored in Firestore.
 
-### `npm run eject`
+- **Styled Components:** Styling is implemented using the Styled Components library.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- **OMDb API:** The Open Movie Database is used for getting movie information.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Components
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+**Add Review Component:** The `AddReview` component allows users to add or edit reviews for a specific movie. It utilizes `ReactQuill` for a rich text editor, and users can save or delete their reviews.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+**Home Component:** The `Home` component is the landing page of the application, providing a search bar for users to search for movies and TV shows. It renders the `SearchMovie` component.
 
-## Learn More
+**Movie Component:** The `Movie` component displays details about a specific movie, including its title, poster, and additional information. Users can also view reviews for the movie and add their own if logged in.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+**Navigation Component:** The `Navigation` component provides navigation links for users. It changes dynamically based on whether the user is logged in or not, showing appropriate links like Home, Sign In, Sign Up, Sign Out, and Reviews.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+**Review Component:** The `Review` component displays reviews for a specific movie. It fetches and renders reviews using data from Firebase. If there are no reviews, it displays a message.
 
-### Code Splitting
+**ReviewEditor Component:** The `ReviewEditor` component allows users to edit their existing reviews for a specific movie. It uses the `AddReview` component for review editing.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+**SearchMovie Component:** The `SearchMovie` component fetches and displays a list of movies based on the user's search term. Each movie title is a link that leads to the individual movie page.
 
-### Analyzing the Bundle Size
+**SignIn & SignUp Components:** The `SignIn` and `SignUp` components provide forms for users to sign in or sign up. Users can input their email and password (and username for sign-up) to access or create an account.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+**UserReviews Component:** The `UserReviews` component displays a user's reviews with links to edit each review. It utilizes the `DOMPurify` library for sanitizing and displaying sanitized HTML content.
