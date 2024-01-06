@@ -1,8 +1,7 @@
-import { useState, useContext } from "react";
+import { useState } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { saveReview, deleteReview } from "../../utils/firebase/firebase.utils";
-import { UserContext } from "../../contexts/user.context";
 import {
   ReviewContainer,
   QuillContainer,
@@ -10,10 +9,16 @@ import {
   SaveButton,
   DeleteButton,
 } from "./add-review.styles";
+import { useDispatch, useSelector } from "react-redux";
+import { selectUserReviews } from "../../store/user/user.selector";
+import { setUserReviews } from "../../store/user/user.action";
+import { useNavigate } from "react-router-dom";
 
 export function AddReview({ movieId, movieTitle, movieReview }) {
   const [value, setValue] = useState(movieReview || "");
-  const { userReviews, setUserReviews } = useContext(UserContext);
+  const userReviews = useSelector(selectUserReviews);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   async function deleteHandler() {
     const response = await deleteReview(movieId);
@@ -21,16 +26,16 @@ export function AddReview({ movieId, movieTitle, movieReview }) {
     const updatedUserReviews = userReviews.filter(
       (review) => review.movieId !== movieId
     );
-    setUserReviews(updatedUserReviews);
+    dispatch(setUserReviews(updatedUserReviews));
     alert("Review deleted!");
-    window.location.reload();
+    navigate(0);
   }
 
   async function saveClickHandler() {
     const { userReviews } = await saveReview(movieId, movieTitle, value);
-    setUserReviews(userReviews);
+    dispatch(setUserReviews(userReviews));
     alert("Review saved!");
-    window.location.reload();
+    navigate(0);
   }
 
   const modules = {

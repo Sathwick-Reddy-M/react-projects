@@ -1,6 +1,5 @@
 import DOMPurify from "dompurify";
 import { useContext } from "react";
-import { UserContext } from "../../contexts/user.context";
 import {
   UserReviewsContainer,
   ReviewsTitle,
@@ -9,9 +8,11 @@ import {
   MovieTitle,
   ReviewContent,
 } from "./user-reviews.styles";
+import { useSelector } from "react-redux";
+import { selectUserReviews } from "../../store/user/user.selector";
 
 export function UserReviews() {
-  const { userReviews } = useContext(UserContext);
+  const userReviews = useSelector(selectUserReviews);
 
   return (
     <UserReviewsContainer>

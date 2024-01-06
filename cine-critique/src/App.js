@@ -7,8 +7,32 @@ import "./App.css";
 import { Movie } from "./components/movie/movie.component";
 import { UserReviews } from "./components/user-reviews/user-reviews.component";
 import { ReviewEditor } from "./components/review-editor/review-editor.componet";
+import { useEffect } from "react";
+import {
+  getUserReviews,
+  onAuthStateChangedListener,
+} from "./utils/firebase/firebase.utils";
+import { setCurrentUser, setUserReviews } from "./store/user/user.action";
+import { useDispatch } from "react-redux";
 
 function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const unsubscribeFromAuth = onAuthStateChangedListener(async (user) => {
+      if (user) {
+        const reviews = await getUserReviews(user);
+        dispatch(setCurrentUser(user));
+        dispatch(setUserReviews(reviews));
+      } else {
+        dispatch(setCurrentUser(null));
+        dispatch(setUserReviews(null));
+      }
+    });
+
+    return unsubscribeFromAuth;
+  }, []);
+
   return (
     <Routes>
       <Route path="/" element={<Navigation />}>

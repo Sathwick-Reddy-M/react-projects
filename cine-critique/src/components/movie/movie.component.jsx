@@ -1,20 +1,25 @@
-import { useEffect, useState, Fragment, useContext } from "react";
+import { useEffect, useState, Fragment } from "react";
 import { useParams } from "react-router-dom";
 import { getMovieDetails } from "../../utils/requests/requests.utils";
 import { Review } from "../review/review.component";
 import { AddReview } from "../add-review/add-review.component";
-import { UserContext } from "../../contexts/user.context";
 import {
   MovieContainer,
   MovieTitle,
   MoviePoster,
   MovieTable,
 } from "./movie.styles";
+import { useSelector } from "react-redux";
+import {
+  selectCurrentUser,
+  selectUserReviews,
+} from "../../store/user/user.selector";
 
 export function Movie() {
   const { movieId } = useParams();
   const [movieDetails, setMovieDetails] = useState(null);
-  const { currentUser, userReviews } = useContext(UserContext);
+  const currentUser = useSelector(selectCurrentUser);
+  const userReviews = useSelector(selectUserReviews);
   const reviewObj = userReviews
     ? userReviews.find((review) => review.movieId === movieId)
     : null;
