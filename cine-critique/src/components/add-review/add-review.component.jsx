@@ -11,7 +11,7 @@ import {
 } from "./add-review.styles";
 import { useDispatch, useSelector } from "react-redux";
 import { selectUserReviews } from "../../store/user/user.selector";
-import { setUserReviews } from "../../store/user/user.action";
+import { setUserReviews } from "../../store/user/user.reducer";
 import { useNavigate } from "react-router-dom";
 
 export function AddReview({ movieId, movieTitle, movieReview }) {

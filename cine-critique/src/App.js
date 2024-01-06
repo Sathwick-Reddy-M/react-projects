@@ -12,7 +12,7 @@ import {
   getUserReviews,
   onAuthStateChangedListener,
 } from "./utils/firebase/firebase.utils";
-import { setCurrentUser, setUserReviews } from "./store/user/user.action";
+import { setCurrentUser, setUserReviews } from "./store/user/user.reducer";
 import { useDispatch } from "react-redux";
 
 function App() {
