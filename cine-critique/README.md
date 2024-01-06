@@ -1,6 +1,6 @@
 # Movie Reviews App
 
-This platform allows users to explore movies, read, and write reviews for movies. It utilizes Firebase for user authentication and Firestore for storing user details and reviews for each movie. React Context API is used for sharing user and user reviews data among the components.
+This platform allows users to explore movies, read, and write reviews for movies. It utilizes Firebase for user authentication and Firestore for storing user details and reviews for each movie. [React Context API](https://github.com/Sathwick-Reddy-M/react-projects/tree/5e3d2d91decd203f582fda56d624c12d28b8877a), [useReducer](https://github.com/Sathwick-Reddy-M/react-projects/tree/710638d4311286b9f41624dfe5fb801efa797c60), [React Redux](https://github.com/Sathwick-Reddy-M/react-projects/tree/65acd580f37afe544bfe099db6b20b7a53273412) and [Redux Toolkit](https://github.com/Sathwick-Reddy-M/react-projects) are used for sharing user and user reviews data among the components.
 
 Checkout the app [here](https://k997nc.csb.app/)
 
